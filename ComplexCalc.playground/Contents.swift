@@ -55,12 +55,12 @@ class Calculator {
     }
   
     func mathOp(args: [Int], beg: Int, op: (_ first: Int, _ second: Int)-> (Int)) -> Int{
-        var total = 0
+        var total = op(args[beg], args[beg + 1])
         
-        for i in 0...args.count-1{
-            total += op(total, args[i+1])
+        for i in beg+2...args.count - 1{
+            total = op(total, args[i])
+            
         }
-        print(total)
         return total
     }
 
@@ -74,11 +74,11 @@ class Calculator {
     }
     
     func add(lhs: [String: Int], rhs: [String: Int]) -> [String: Int]{
-        let x1 = Array(lhs)[0].value
-        let x2 = Array(rhs)[0].value
+        let x1 = lhs["x"]!
+        let x2 = rhs["x"]!
 
-        let y1 = Array(lhs)[1].value
-        let y2 = Array(rhs)[1].value
+        let y1 = lhs["y"]!
+        let y2 = rhs["y"]!
         
         let first = x1 + x2
         let second = y1 + y2
@@ -86,15 +86,14 @@ class Calculator {
     }
     
     func subtract(lhs: [String: Int], rhs: [String: Int]) -> [String: Int]{
-        let x1 = Array(lhs)[0].value
-        let x2 = Array(rhs)[0].value
-        
-        let y1 = Array(lhs)[1].value
-        let y2 = Array(rhs)[1].value
+        let x1 = lhs["x"]!
+        let x2 = rhs["x"]!
 
+        let y1 = lhs["y"]!
+        let y2 = rhs["y"]!
+        
         let first = x1 - x2
         let second = y1 - y2
-        
         return ["x": first, "y": second]
     }
 }
